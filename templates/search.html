@@ -1,0 +1,223 @@
+{% load static %}
+{% include "bootstrap.html" %}
+{% include "navigation.html" %}
+<!-- page title -->
+<section class="section section--first section--bg" data-bg="{% static 'img/section/section.jpg'%}">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section__wrap">
+                    <!-- section title -->
+                    <h2 class="section__title">Movies</h2>
+                    <!-- end section title -->
+
+                    <!-- breadcrumb -->
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb__item"><a href="#">Home</a></li>
+                        <li class="breadcrumb__item breadcrumb__item--active">Movies</li>
+                    </ul>
+                    <!-- end breadcrumb -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end page title -->
+	<!-- filter -->
+	<div class="filter">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="filter__content">
+						<div class="filter__items">
+							<!-- filter item -->
+							<div class="filter__item" id="filter__genre">
+								<span class="filter__item-label">GENRE:</span>
+
+								<div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-genre" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<input type="button" value="Action/Adventure">
+									<span></span>
+								</div>
+
+								<ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-genre">
+									<li>Action/Adventure</li>
+									<li>Animals</li>
+									<li>Animation</li>
+									<li>Biography</li>
+									<li>Comedy</li>
+									<li>Cooking</li>
+									<li>Dance</li>
+									<li>Documentary</li>
+									<li>Drama</li>
+									<li>Education</li>
+									<li>Entertainment</li>
+									<li>Family</li>
+									<li>Fantasy</li>
+									<li>History</li>
+									<li>Horror</li>
+									<li>Independent</li>
+									<li>International</li>
+									<li>Kids</li>
+									<li>Kids & Family</li>
+									<li>Medical</li>
+									<li>Military/War</li>
+									<li>Music</li>
+									<li>Musical</li>
+									<li>Mystery/Crime</li>
+									<li>Nature</li>
+									<li>Paranormal</li>
+									<li>Politics</li>
+									<li>Racing</li>
+									<li>Romance</li>
+									<li>Sci-Fi/Horror</li>
+									<li>Science</li>
+									<li>Science Fiction</li>
+									<li>Science/Nature</li>
+									<li>Spanish</li>
+									<li>Travel</li>
+									<li>Western</li>
+								</ul>
+							</div>
+							<!-- end filter item -->
+
+							<!-- filter item -->
+							<div class="filter__item" id="filter__quality">
+								<span class="filter__item-label">QUALITY:</span>
+
+								<div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-quality" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<input type="button" value="HD 1080">
+									<span></span>
+								</div>
+
+								<ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-quality">
+									<li>HD 1080</li>
+									<li>HD 720</li>
+									<li>DVD</li>
+									<li>TS</li>
+								</ul>
+							</div>
+							<!-- end filter item -->
+
+							<!-- filter item -->
+							<div class="filter__item" id="filter__rate">
+								<span class="filter__item-label">IMBd:</span>
+
+								<div class="filter__item-btn dropdown-toggle" role="button" id="filter-rate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<div class="filter__range">
+										<div id="filter__imbd-start"></div>
+										<div id="filter__imbd-end"></div>
+									</div>
+									<span></span>
+								</div>
+
+								<div class="filter__item-menu filter__item-menu--range dropdown-menu" aria-labelledby="filter-rate">
+									<div id="filter__imbd"></div>
+								</div>
+							</div>
+							<!-- end filter item -->
+
+							<!-- filter item -->
+							<div class="filter__item" id="filter__year">
+								<span class="filter__item-label">RELEASE YEAR:</span>
+
+								<div class="filter__item-btn dropdown-toggle" role="button" id="filter-year" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<div class="filter__range">
+										<div id="filter__years-start"></div>
+										<div id="filter__years-end"></div>
+									</div>
+									<span></span>
+								</div>
+
+								<div class="filter__item-menu filter__item-menu--range dropdown-menu" aria-labelledby="filter-year">
+									<div id="filter__years"></div>
+								</div>
+							</div>
+							<!-- end filter item -->
+						</div>
+						
+						<!-- filter btn -->
+						<button class="filter__btn" type="button">apply filter</button>
+						<!-- end filter btn -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end filter -->
+    <div class="catalog">
+        
+        
+
+        {% block cont %}
+		<div class="container">
+			<h1 class="text-white">Search Results</h1>
+		  
+			{% block content %}
+			<div class="row">
+			  {% if results %}
+			  {% for result in results %}
+			  <!-- card -->
+			  <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+				<div class="card">
+				  <div class="card__cover">
+					<img src="{{ result.coverphoto.url }}" alt="{{ result.title }} cover photo">
+					<a href="{% if result.serie %}{% url 'serie_play' serie_id=result.serie.id %}{% else %}{% url 'movie_play' movie_id=result.id %}{% endif %}" class="card__play">
+					  <i class="icon ion-ios-play"></i>
+					</a>
+				  </div>
+				  <div class="card__content">
+					<h3 class="card__title"><a href="#">{{ result.title }}</a></h3>
+					<span class="card__category">
+					  {% if result.serie %}<a href="#">{{ result.serie.genres }}</a>{% else %}<a href="#">{{ result.genre }}</a>{% endif %}
+					  {% if result.serie %} <a href="#">{{ result.serie.duration }}</a>{% else %}<a href="#">{{ result.duration }}</a>{% endif %}
+					</span>
+					<span class="card__rate"><i class="icon ion-ios-star"></i>{{ result.rating }}</span>
+				  </div>
+				</div>
+			  </div>
+			  <!-- end card -->
+			  {% endfor %}
+			  {% else %}
+			  <p>No results found.</p>
+			  {% endif %}
+			</div>
+			{% endblock %}
+		  
+		  </div>
+		  
+		  
+        {% endblock %}
+        
+        
+    </div>
+	 <!-- paginator -->
+	 <div class="row">
+		<div class="col-12">
+			<ul class="paginator paginator--list">
+				{% if series.has_previous %}
+				<li class="paginator__item paginator__item--prev">
+					<a href="?page={{ series.previous_page_number }}"><i class="icon ion-ios-arrow-back"></i> Prev</a>
+				</li>
+				{% endif %}
+				{% for num in series.paginator.page_range %}
+				{% if series.number == num %}
+				<li class="paginator__item paginator__item--active"><a href="#">{{ num }}</a></li>
+				{% elif num > series.number|add:'-3' and num < series.number|add:'3' %}
+				<li class="paginator__item"><a href="?page={{ num }}">{{ num }}</a></li>
+				{% endif %}
+				{% endfor %}
+				{% if series.has_next %}
+				<li class="paginator__item paginator__item--next">
+					<a href="?page={{ movies.next_page_number }}"><i class="icon ion-ios-arrow-forward"></i>Next</a>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+	<!-- end paginator -->
+    
+<!-- end catalog -->
+<!-- end catalog -->
+{% include "adds.html" %}
+
+{% include "footer.html" %}

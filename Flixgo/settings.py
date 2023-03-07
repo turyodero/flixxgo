@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
     
     'dotenv',
     
@@ -88,11 +86,11 @@ WSGI_APPLICATION = 'Flixgo.wsgi.application'
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.postgresql',
-		'NAME': 'railway',
+		'NAME': 'flixgo',
 		'USER': 'postgres',
-		'PASSWORD': 'keXvubc2HrYcblnCSkAm',
-		'HOST':'containers-us-west-113.railway.app',
-		'PORT':'6611',
+		'PASSWORD': 'deron',
+		'HOST':'localhost',
+		'PORT':'5432',
 	}
 }
 

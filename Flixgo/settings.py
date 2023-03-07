@@ -26,11 +26,12 @@ load_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
 
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
+os.environ['MYSQL_CONFIG'] = '/usr/local/mysql/bin/mysql_config'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -84,27 +85,16 @@ WSGI_APPLICATION = 'Flixgo.wsgi.application'
 
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.mysql',
+		'ENGINE': 'django.db.backends.postgresql',
 		'NAME': 'flixgo',
-		'USER': 'root',
-		'PASSWORD': '0756606134',
-		'HOST':'127.0.0.1',
-		'PORT':'3306',
+		'USER': 'postgres',
+		'PASSWORD': 'deron',
+		'HOST':'localhost',
+		'PORT':'5432',
 	}
 }
 
-# Railway database settings
-if 'RAILWAY_STATIC_URL' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'flixgo',
-            'USER': os.environ.get('root'),
-            'PASSWORD': os.environ.get('0756606134'),
-            'HOST': os.environ.get('127.0.0.1'),
-            'PORT': os.environ.get('3306'),
-        }
-    }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

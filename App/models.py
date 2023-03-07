@@ -32,6 +32,10 @@ class Movie(models.Model):
     duration = models.TextField(max_length=10)
     link = models.URLField()
 
+
+    class Meta:
+        db_table = 'app_movie'
+
     def __str__(self):
         return self.title
     
@@ -66,6 +70,11 @@ class Serie(models.Model):
     country= models.CharField(max_length=50)
     duration = models.TextField(max_length=10)
     link = models.URLField()
+
+
+
+    class Meta:
+        db_table = 'app_serie'
 
     def __str__(self):
         return self.title

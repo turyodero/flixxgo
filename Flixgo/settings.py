@@ -89,11 +89,11 @@ WSGI_APPLICATION = 'Flixgo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DATABASE_NAME', 'flixgo'),
+        'NAME': os.environ.get('DATABASE_NAME', 'railway'),
         'USER': os.environ.get('DATABASE_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'deron'),
-        'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
-        'PORT': os.environ.get('DATABASE_PORT', '5432'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'keXvubc2HrYcblnCSkAm'),
+        'HOST': os.environ.get('DATABASE_HOST', 'containers-us-west-113.railway.app'),
+        'PORT': os.environ.get('DATABASE_PORT', '6611'),
     }
 }
 

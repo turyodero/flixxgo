@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'psycopg2',
     
     'dotenv',
     
@@ -85,7 +86,7 @@ WSGI_APPLICATION = 'Flixgo.wsgi.application'
 
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.postgresql',
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
 		'NAME': 'flixgo',
 		'USER': 'postgres',
 		'PASSWORD': 'deron',
